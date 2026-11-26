@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PK Health Rx - ใบสั่งสุขภาพดิจิทัล อบจ.ประจวบคีรีขันธ์</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#0f766e;--p2:#14b8a6;--bg:#f1f5f9;--tx:#0f172a;--mut:#64748b;--bd:#e2e8f0}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Sarabun','Noto Sans Thai',system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:16px}
+#hdr{background:linear-gradient(135deg,#0f766e,#0369a1);color:#fff;padding:12px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+#hdr .logo{background:#fff;border-radius:10px;padding:3px;object-fit:contain}
+.ht{flex:1;min-width:220px}.ht h1{margin:0;font-size:1.35rem}.ht p{margin:3px 0 0;opacity:.9;font-size:.8rem}
+.hu{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.82rem;text-align:right}
+.hu span{opacity:.9}
+nav{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5}
+nav button{border:0;background:#f1f5f9;padding:9px 14px;border-radius:999px;cursor:pointer;font:inherit;color:var(--tx)}
+nav button.on{background:var(--p);color:#fff;font-weight:600}
+main{max-width:1150px;margin:0 auto;padding:16px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card h2,.card h3{margin-top:0}
+.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:14px;border-left:5px solid var(--p2)}
+.kpi b{display:block;font-size:1.6rem;color:var(--p)}.kpi span{color:var(--mut);font-size:.83rem}
+label{display:block;font-size:.85rem;color:var(--mut);margin-bottom:3px}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;background:#fff}
+button.btn{background:var(--p);color:#fff;border:0;padding:10px 18px;border-radius:8px;font:inherit;cursor:pointer;font-weight:600}
+button.btn.sec{background:#e2e8f0;color:var(--tx)}button.btn.red{background:#dc2626}
+button.btn:disabled{opacity:.6;cursor:wait}
+button.sm{padding:4px 10px;font-size:.8rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:middle}
+th{background:#f8fafc;color:var(--mut);font-weight:600}
+td.r,th.r{text-align:right}.scroll{overflow-x:auto}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.78rem;font-weight:600}
+.b-green{background:#dcfce7;color:#166534}.b-yellow{background:#fef9c3;color:#854d0e}
+.b-orange{background:#ffedd5;color:#9a3412}.b-red{background:#fee2e2;color:#991b1b}
+.bar{display:grid;grid-template-columns:200px 1fr 40px;gap:8px;align-items:center;margin:6px 0;font-size:.85rem}
+.bar div{background:#e2e8f0;border-radius:999px;height:12px;overflow:hidden}.bar i{display:block;height:100%;border-radius:999px}
+.prog{background:#e2e8f0;border-radius:999px;height:10px;overflow:hidden;min-width:90px}.prog i{display:block;height:100%;background:var(--p2)}
+.note{background:#ecfeff;border:1px solid #a5f3fc;border-radius:10px;padding:10px 14px;font-size:.88rem;margin-bottom:14px}
+.warn{background:#fef2f2;border:1px solid #fecaca}
+.mut{color:var(--mut);font-size:.85rem}
+.fb{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.donut{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.lg{font-size:.88rem;margin:4px 0}.lg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px}
+.lgs{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;margin-top:4px}.lgs i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:middle}
+.rx{border:3px double var(--p);border-radius:14px;padding:22px;background:#fff}
+.rx .top{text-align:center}.rx h2{text-align:center;color:var(--p);margin:6px 0 4px}
+.rx .sub{text-align:center;color:var(--mut);margin-bottom:14px;font-size:.9rem}
+.rx dl{display:grid;grid-template-columns:170px 1fr;gap:6px 12px;margin:0}.rx dt{color:var(--mut)}.rx dd{margin:0;font-weight:600}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:40px;text-align:center;font-size:.9rem}.sign div{border-top:1px dotted #000;padding-top:6px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+footer{text-align:center;color:var(--mut);font-size:.8rem;padding:20px}
+#login{display:none;min-height:100vh;align-items:center;justify-content:center;padding:16px;background:linear-gradient(135deg,#0f766e,#0369a1)}
+.lcard{background:#fff;border-radius:18px;padding:28px;width:100%;max-width:400px;box-shadow:0 10px 40px rgba(0,0,0,.25);text-align:center}
+.lcard h1{margin:8px 0 2px;color:var(--p)}.lcard p{margin:0 0 14px;color:var(--mut);font-size:.88rem}
+.lcard form{text-align:left}.lcard input{font-size:1.2rem;letter-spacing:2px;margin-bottom:8px}
+.lerr{color:#dc2626;font-size:.88rem;min-height:20px;margin-bottom:6px}.hint{font-size:.8rem;color:var(--mut)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;display:none;z-index:99}
+@media print{body *{visibility:hidden}#rxcard,#rxcard *{visibility:visible}#rxcard{position:absolute;left:0;top:0;width:100%}}
+</style>
+</head>
+<body>
+<div id="login"></div>
+<div id="app" style="display:none">
+ <div id="hdr"></div>
+ <nav id="nav"></nav>
+ <main id="main"></main>
+ <footer>ข้อมูลสุขภาพเป็นข้อมูลส่วนบุคคลตาม PDPA โปรดออกจากระบบทุกครั้งหลังใช้งาน | เครื่องมือช่วยคัดกรองเบื้องต้น ไม่ใช่การวินิจฉัยโรค</footer>
+</div>
+<div id="toast"></div>
+
+<script>
+/* =================== ตั้งค่า =================== */
+const CONFIG={
+ SHEETS_URL:'',                 // วาง URL Web App ของ Google Apps Script ที่นี่ (หรือตั้งในหน้า "ผู้ดูแลระบบ")
+ LOGO_URL:'logo-pkk-pao.png',   // ไฟล์โลโก้ อบจ.ประจวบฯ วางไว้โฟลเดอร์เดียวกับ index.html
+ ADMIN_CODE:'00000',            // รหัสผู้ดูแลระบบ (อบจ.)
+ ADMIN_PIN:'pk2570',            // PIN เริ่มต้นของผู้ดูแล (ระบบบังคับเปลี่ยนเมื่อเข้าครั้งแรก) ต้องตรงกับ Code.gs
+ SALT:'pk2570|',                // ต้องตรงกับ Code.gs
+ IDLE_MIN:20,TARGET:400
+};
+
+/* =================== รายชื่อ รพ.สต. 44 แห่ง (รหัส|ชื่อ|อำเภอ) =================== */
+const FAC_RAW=`08740|รพ.สต.ทับใต้|หัวหิน
+08736|รพ.สต.บ้านเขาเต่า|หัวหิน
+08696|รพ.สต.บ้านโป่งกระสัง|กุยบุรี
+08699|รพ.สต.บ้านหนองหอย|ทับสะแก
+08702|รพ.สต.เขาล้าน|ทับสะแก
+14212|รพ.สต.บ้านทุ่งประดู่|ทับสะแก
+08709|รพ.สต.พงศ์ประศาสน์|บางสะพาน
+08710|รพ.สต.ร่อนทอง|บางสะพาน
+08714|รพ.สต.ธงชัย|บางสะพาน
+08718|รพ.สต.ทองมงคล|บางสะพาน
+08716|รพ.สต.บ้านห้วยไก่ต่อ|บางสะพาน
+08707|รพ.สต.บ้านหนองตาจ่า|บางสะพาน
+08721|รพ.สต.บ้านดอนจวง|บางสะพานน้อย
+08722|รพ.สต.บางสะพาน|บางสะพานน้อย
+08732|รพ.สต.บ้านหนองตาเมือง|ปราณบุรี
+08733|รพ.สต.บ้านห้วยแสลงพันธ์|ปราณบุรี
+08672|รพ.สต.บ้านหนองบัว|เมืองฯ
+08674|รพ.สต.คลองวาฬ|เมืองฯ
+08681|สถานีอนามัยเฉลิมพระเกียรติ 60 พรรษา นวมินทราชินี (บ้านนิคม กม.5)|เมืองฯ
+08746|รพ.สต.บ้านหนองหญ้าปล้อง|สามร้อยยอด
+08749|รพ.สต.บ้านหนองแก|สามร้อยยอด
+23814|รพ.สต.บ้านแพรกตะคร้อ|หัวหิน
+08739|รพ.สต.บ้านห้วยไทรงาม|หัวหิน
+08742|รพ.สต.บ้านห้วยผึ้ง|หัวหิน
+08735|รพ.สต.เขาจ้าว|ปราณบุรี
+08729|รพ.สต.ปราณบุรี|ปราณบุรี
+08744|รพ.สต.สามร้อยยอด|สามร้อยยอด
+14216|รพ.สต.บ้านหนองจิก|สามร้อยยอด
+08690|รพ.สต.เขาแดง|กุยบุรี
+08673|รพ.สต.บ้านทุ่งเคล็ด|เมืองฯ
+08684|รพ.สต.บ้านดอนซอ|เมืองฯ
+08683|รพ.สต.บ่อนอก|เมืองฯ
+08675|รพ.สต.ด่านสิงขร|เมืองฯ
+08676|รพ.สต.บ้านห้วยน้ำพุ|เมืองฯ
+08680|รพ.สต.นิคมสร้างตนเอง กม.12|เมืองฯ
+08698|รพ.สต.บ้านอ่างทอง|ทับสะแก
+08701|รพ.สต.นาหูกวาง|ทับสะแก
+08715|รพ.สต.บ้านหนองมงคล|บางสะพาน
+08708|รพ.สต.บ้านทุ่งขี้ต่าย|บางสะพาน
+08719|รพ.สต.บ้านทองมงคล|บางสะพาน
+08720|รพ.สต.แม่รำพึง|บางสะพาน
+08713|รพ.สต.บ้านถ้ำคีรีวงศ์|บางสะพาน
+08725|รพ.สต.ช้างแรก|บางสะพานน้อย
+08728|รพ.สต.บ้านบางเจริญ|บางสะพานน้อย`;
+const CITY='เมืองประจวบคีรีขันธ์';
+const FAC=FAC_RAW.split('\n').map(l=>{const[c,n,d]=l.split('|');return{code:c.trim(),name:n.trim(),dist:d.trim()==='เมืองฯ'?CITY:d.trim()}});
+const FACM=Object.fromEntries(FAC.map(f=>[f.code,f]));
+const DISTRICTS=[CITY,'กุยบุรี','ทับสะแก','บางสะพาน','บางสะพานน้อย','ปราณบุรี','หัวหิน','สามร้อยยอด'];
+const sd=d=>d===CITY?'เมืองฯ':d;
+
+const BUDGET=[
+ {id:'a1-1',act:1,name:'ค่าอาหารกลางวัน (100 คน × 200)',amt:20000},
+ {id:'a1-2',act:1,name:'ค่าอาหารว่างและเครื่องดื่ม (100 × 50 × 2 มื้อ)',amt:10000},
+ {id:'a1-3',act:1,name:'ค่าวิทยากร (2 คน × 6 ชม. × 1,200)',amt:14400},
+ {id:'a1-4',act:1,name:'ค่าเอกสาร ป้ายไวนิล และวัสดุ',amt:5600},
+ {id:'a2-1',act:2,name:'ชุดตรวจน้ำตาลปลายนิ้วและวัสดุคัดกรอง',amt:120000},
+ {id:'a2-2',act:2,name:'สมุดบันทึกใบสั่งสุขภาพและอุปกรณ์ออกกำลังกาย (400 × 200)',amt:80000},
+ {id:'a2-3',act:2,name:'ค่าใช้จ่ายติดตามเยี่ยมบ้านของ อสม.',amt:100000},
+ {id:'a2-4',act:2,name:'ค่าวิทยากรนำออกกำลังกายกลุ่มในชุมชน',amt:60000},
+ {id:'a2-5',act:2,name:'คลินิกสุขภาพนอกเวลา',amt:70000},
+ {id:'a2-6',act:2,name:'ระบบข้อมูล Web App (โฮสติ้ง/อินเทอร์เน็ต/อบรม)',amt:50000},
+ {id:'a2-7',act:2,name:'ติดตามประเมินผลและถอดบทเรียน',amt:70000}
+];
+const ACT_NAME={1:'กิจกรรมที่ 1: ประชุมสร้างความร่วมมือภาคีเครือข่ายและพัฒนาศักยภาพทีมงาน',2:'กิจกรรมที่ 2: ขับเคลื่อนใบสั่งสุขภาพ "ออกกำลังกายเป็นยา" ในชุมชน'};
+const LV={refer:['ส่งต่อแพทย์','b-red'],high:['เสี่ยงสูง','b-orange'],mid:['เสี่ยงปานกลาง','b-yellow'],low:['เสี่ยงต่ำ','b-green']};
+const LVC={low:'#22c55e',mid:'#eab308',high:'#f97316',refer:'#ef4444'};
+
+/* =================== ตัวช่วยทั่วไป =================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nf=n=>Number(n).toLocaleString('th-TH');
+const today=()=>new Date().toLocaleDateString('en-CA');
+const addDays=(s,n)=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return d.toLocaleDateString('en-CA')};
+const thDate=s=>new Date(s+'T00:00:00').toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric'});
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2800)}
+
+/* =================== ค่าตั้งต้น / เซสชัน / ฐานข้อมูล =================== */
+let cfg=JSON.parse(localStorage.getItem('pkhealthrx.cfg')||'{}');
+const saveCfg=()=>localStorage.setItem('pkhealthrx.cfg',JSON.stringify(cfg));
+const url=()=>(cfg.url||CONFIG.SHEETS_URL||'').trim();
+let pins=JSON.parse(localStorage.getItem('pkhealthrx.pins')||'{}');
+const savePins=()=>localStorage.setItem('pkhealthrx.pins',JSON.stringify(pins));
+let SESS=JSON.parse(sessionStorage.getItem('pkhealthrx.sess')||'null');
+const saveSess=()=>sessionStorage.setItem('pkhealthrx.sess',JSON.stringify(SESS));
+const isAdmin=()=>!!SESS&&SESS.code===CONFIG.ADMIN_CODE;
+
+const DBK='pkhealthrx.v2';
+function fresh(){return{participants:[],logs:[],assess:[],spent:{},metaUpd:0,lp:{},partners:[
+ {name:'องค์การบริหารส่วนจังหวัดประจวบคีรีขันธ์ (กองสาธารณสุข)',type:'อปท.',role:'เจ้าภาพหลัก / สนับสนุนงบประมาณ / กำหนดมาตรฐานและข้อมูลระดับจังหวัด',contact:''},
+ {name:'สำนักงานสาธารณสุขจังหวัด/อำเภอ',type:'หน่วยงานสาธารณสุข',role:'โค้ชหน้างานระดับอำเภอ',contact:''},
+ {name:'โรงพยาบาลส่งเสริมสุขภาพตำบล (รพ.สต.) 44 แห่ง',type:'หน่วยบริการปฐมภูมิ',role:'คัดกรอง ออกใบสั่งสุขภาพ ติดตามผล',contact:''},
+ {name:'อาสาสมัครสาธารณสุข (อสม.) / แกนนำสุขภาพ',type:'อาสาสมัคร',role:'เยี่ยมบ้าน คู่หูสุขภาพ จัดกิจกรรมออกกำลังกายกลุ่ม',contact:''},
+ {name:'โรงพยาบาลแม่ข่าย',type:'โรงพยาบาล',role:'รับส่งต่อผู้ที่น้ำตาลสูง/ต้องพบแพทย์',contact:''}]}}
+let db=(()=>{try{const d=JSON.parse(localStorage.getItem(DBK));return d&&d.participants?Object.assign(fresh(),d):fresh()}catch(e){return fresh()}})();
+const saveRaw=()=>localStorage.setItem(DBK,JSON.stringify(db));
+let syncTimer;
+function save(){saveRaw();schedSync()}
+function schedSync(){if(!SESS||!url()||cfg.auto===false||SESS.must)return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>sync(false),5000)}
+
+let tab='dash',selRx='',selLog='',selOut='',fD='',fF='',qReg='',IDX={};
+
+/* =================== เข้ารหัส PIN =================== */
+async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+const hashPin=(code,pin)=>sha(CONFIG.SALT+code+':'+pin);
+const defHash=code=>hashPin(code,code===CONFIG.ADMIN_CODE?CONFIG.ADMIN_PIN:code);
+
+/* =================== เรียก Google Apps Script =================== */
+async function api(action,extra={},cred){
+ const c=cred||{code:SESS.code,hash:SESS.hash};
+ const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),25000);
+ try{
+  const r=await fetch(url(),{method:'POST',body:JSON.stringify({action,fac:c.code,hash:c.hash,...extra}),signal:ctl.signal});
+  return await r.json();
+ }finally{clearTimeout(t)}
+}
+
+/* =================== โลโก้ =================== */
+const logoSrc=()=>cfg.logo||CONFIG.LOGO_URL;
+const PH_LOGO='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0f766e"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="3"/><path d="M44 28h12v16h16v12H56v16H44V56H28V44h16z" fill="#fff"/></svg>');
+const logoImg=h=>`<img class="logo" style="height:${h}px;width:${h}px" src="${esc(logoSrc())}" alt="โลโก้ อบจ.ประจวบคีรีขันธ์" onerror="this.onerror=null;this.src=PH_LOGO">`;
+function upLogo(e){
+ const f=e.target.files[0];if(!f)return;const r=new FileReader();
+ r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,256/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cfg.logo=c.toDataURL('image/png');saveCfg();buildHeader();render();toast('เปลี่ยนโลโก้แล้ว (เก็บเฉพาะเครื่องนี้)')};im.src=r.result};
+ r.readAsDataURL(f);
+}
+function resetLogo(){delete cfg.logo;saveCfg();buildHeader();render()}
+
+/* =================== เข้าสู่ระบบ =================== */
+function showLogin(msg){
+ $('#app').style.display='none';const L=$('#login');L.style.display='flex';
+ L.innerHTML=`<div class="lcard">${logoImg(90)}<h1>PK Health Rx</h1>
+ <p>โครงการรวมพลังภาคีเครือข่ายสร้างเสริมสุขภาพจังหวัดประจวบคีรีขันธ์<br>องค์การบริหารส่วนจังหวัดประจวบคีรีขันธ์</p>
+ <form onsubmit="return doLogin(event)">
+  <label>เลขสถานพยาบาล 5 หลัก (ชื่อผู้ใช้)</label>
+  <input id="lc" inputmode="numeric" maxlength="5" pattern="\\d{5}" required autocomplete="username" oninput="lcHint()">
+  <div id="lh" class="hint" style="margin-bottom:8px;min-height:18px"></div>
+  <label>PIN</label>
+  <input id="lp" type="password" required autocomplete="current-password">
+  <div id="lerr" class="lerr">${esc(msg||'')}</div>
+  <button class="btn" id="lb" style="width:100%">เข้าสู่ระบบ</button>
+ </form>
+ <p class="hint" style="margin-top:12px">เข้าครั้งแรก: PIN คือเลข 5 หลักเดิม แล้วระบบจะให้ตั้ง PIN ใหม่ทันที</p></div>`;
+}
+function lcHint(){const c=$('#lc').value.trim();const f=FACM[c];$('#lh').textContent=c===CONFIG.ADMIN_CODE?'ผู้ดูแลระบบ อบจ.ประจวบคีรีขันธ์':f?`${f.name} อ.${sd(f.dist)}`:(c.length===5?'ไม่พบรหัสนี้ในรายชื่อ':'')}
+async function doLogin(e){
+ e.preventDefault();
+ const code=$('#lc').value.trim(),pin=$('#lp').value,err=m=>{$('#lerr').textContent=m;$('#lb').disabled=false;return false};
+ if(!(code===CONFIG.ADMIN_CODE||FACM[code]))return err('ไม่พบเลขสถานพยาบาลนี้ในรายชื่อ');
+ if(!(window.crypto&&crypto.subtle))return err('เบราว์เซอร์นี้ไม่รองรับการเข้ารหัส กรุณาเปิดผ่าน https หรือใช้ Chrome/Edge รุ่นใหม่');
+ const lk=JSON.parse(localStorage.getItem('pkhealthrx.lock')||'{}');
+ if(lk[code]&&lk[code].until>Date.now())return err(`ใส่ PIN ผิดหลายครั้ง กรุณารอ ${Math.ceil((lk[code].until-Date.now())/60000)} นาที`);
+ $('#lb').disabled=true;
+ const h=await hashPin(code,pin);
+ let ok=false,isDef=false,via='local';
+ if(url()){
+  try{
+   const r=await api('login',{},{code,hash:h});
+   if(r.ok){ok=true;isDef=!!r.isDefault;via='server'}
+   else if(r.err==='auth'){via='server'}
+   else throw new Error(r.err);
+  }catch(x){via='local'}
+ }
+ if(via==='local'){const dh=await defHash(code);ok=(pins[code]||dh)===h;isDef=!pins[code]}
+ if(!ok){
+  const f=lk[code]||{n:0};f.n++;if(f.n>=5){f.until=Date.now()+5*60000;f.n=0}lk[code]=f;localStorage.setItem('pkhealthrx.lock',JSON.stringify(lk));
+  return err('เลขสถานพยาบาลหรือ PIN ไม่ถูกต้อง');
+ }
+ delete lk[code];localStorage.setItem('pkhealthrx.lock',JSON.stringify(lk));
+ if(isDef)delete pins[code];else pins[code]=h;savePins();
+ SESS={code,hash:h,must:isDef};saveSess();start();return false;
+}
+function logout(){SESS=null;sessionStorage.removeItem('pkhealthrx.sess');clearTimeout(idleT);clearTimeout(syncTimer);fD='';fF='';showLogin()}
+let idleT;
+function resetIdle(){clearTimeout(idleT);if(SESS)idleT=setTimeout(()=>{logout();showLogin('ออกจากระบบอัตโนมัติเนื่องจากไม่มีการใช้งาน')},CONFIG.IDLE_MIN*60000)}
+['click','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,resetIdle));
+function start(){
+ $('#login').style.display='none';$('#app').style.display='block';
+ buildHeader();tab=SESS.must?'acc':'dash';render();resetIdle();window.scrollTo(0,0);
+ if(url()&&!SESS.must)sync(false);
+}
+function buildHeader(){
+ const nm=isAdmin()?'อบจ.ประจวบคีรีขันธ์ (กองสาธารณสุข)':FACM[SESS.code].name;
+ $('#hdr').innerHTML=`${logoImg(54)}<div class="ht"><h1>PK Health Rx : ใบสั่งสุขภาพดิจิทัล</h1><p>โครงการรวมพลังภาคีเครือข่ายสร้างเสริมสุขภาพจังหวัดประจวบคีรีขันธ์ | อบจ.ประจวบคีรีขันธ์ | ปีงบประมาณ 2570</p></div>
+ <div class="hu"><div><b>${esc(nm)}</b><br><span>${isAdmin()?'ผู้ดูแลระบบ':'แกนนำสุขภาพ'} | รหัส ${SESS.code}</span></div>
+ <button class="btn sm sec" onclick="sync(true)">ซิงค์ Google Sheets</button><span id="sst"></span><button class="btn sm red" onclick="logout()">ออกจากระบบ</button></div>`;
+}
+
+/* =================== ขอบเขตข้อมูลตามสิทธิ์ =================== */
+const inScope=r=>isAdmin()||r.fac===SESS.code;
+function PP(){return db.participants.filter(p=>!p.del&&inScope(p)&&(!isAdmin()||((!fD||p.district===fD)&&(!fF||p.fac===fF)))).sort((a,b)=>a.id.localeCompare(b.id))}
+function buildIdx(){
+ IDX={days:{},as:{}};
+ db.logs.forEach(l=>{if(l.del)return;const d=IDX.days[l.pid]||(IDX.days[l.pid]={});d[l.date]=(d[l.date]||0)+l.min});
+ db.assess.forEach(a=>{if(a.del)return;(IDX.as[a.pid]||(IDX.as[a.pid]={}))[a.phase]=a});
+}
+
+/* =================== ตรรกะหลัก =================== */
+function calc(w,hcm,fpg,covid){
+ const bmi=w/Math.pow(hcm/100,2);let s=0;
+ if(bmi>=30)s+=2;else if(bmi>=25)s+=1.5;else if(bmi>=23)s+=1;
+ if(fpg>=126)s+=3;else if(fpg>=100)s+=2;
+ if(covid)s+=1;
+ return{bmi:+bmi.toFixed(1),score:s,level:fpg>=126?'refer':s>=4?'high':s>=2?'mid':'low'};
+}
+function nextId(fac){let m=0;db.participants.forEach(p=>{if(p.fac===fac){const n=+p.id.split('-')[1];if(n>m)m=n}});return fac+'-'+String(m+1).padStart(4,'0')}
+function addP(o){const p={...o,...calc(o.weight,o.height,o.glucose,o.covid),id:nextId(o.fac),start:o.start||today(),upd:Date.now()};db.participants.push(p);return p}
+function putAssess(p,ph,o){const id=p.id+'#'+ph;db.assess=db.assess.filter(a=>a.id!==id);db.assess.push({id,pid:p.id,fac:p.fac,phase:ph,...o,upd:Date.now()})}
+function addLog(p,o){db.logs.push({id:'L'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),pid:p.id,fac:p.fac,...o,upd:Date.now()})}
+const sessions=pid=>Object.values(IDX.days[pid]||{}).filter(v=>v>=30).length;
+const adh=pid=>Math.min(100,Math.round(sessions(pid)/60*100));
+function weekDays(p,w){let c=0;const d=IDX.days[p.id]||{};for(let k=0;k<7;k++)if((d[addDays(p.start,7*(w-1)+k)]||0)>=30)c++;return c}
+const weekNo=p=>Math.max(1,Math.floor((new Date(today())-new Date(p.start+'T00:00:00'))/(7*864e5))+1);
+function outc(p){const a=IDX.as[p.id]||{};const b=a[0]||{weight:p.weight,glucose:p.glucose,walk:null};const l=a[12]||a[6];return l?{b,l}:null}
+const fname=c=>FACM[c]?FACM[c].name:c;
+const opts=sel=>'<option value="">-- เลือกผู้เข้าร่วม --</option>'+PP().map(p=>`<option value="${p.id}" ${p.id===sel?'selected':''}>${p.id} - ${esc(p.name)}</option>`).join('');
+const badge=l=>`<span class="badge ${LV[l][1]}">${LV[l][0]}</span>`;
+const bars=(rows,max)=>rows.map(([l,v,c])=>`<div class="bar"><span>${esc(l)}</span><div><i style="width:${max?v/max*100:0}%;background:${c||'var(--p)'}"></i></div><b>${v}</b></div>`).join('');
+
+/* =================== กราฟ SVG =================== */
+const niceMax=m=>{const p=Math.pow(10,Math.floor(Math.log10(m)));const f=m/p;return(f<=1?1:f<=2?2:f<=4?4:f<=8?8:10)*p};
+const fmtT=v=>v>=1000?(+(v/1000).toFixed(1))+'k':+(+v).toFixed(1);
+const legend=s=>s.length>1?`<div class="lgs">${s.map(x=>`<span><i style="background:${x.color}"></i>${esc(x.name)}</span>`).join('')}</div>`:'';
+function svgBars(labels,series,o={}){
+ const W=560,H=240,L=44,R=10,T=14,B=40,pw=W-L-R,ph=H-T-B;
+ const mx=o.max||niceMax(Math.max(1,...series.flatMap(s=>s.vals.map(v=>v||0))));
+ let g='';
+ for(let i=0;i<=4;i++){const y=T+ph-ph*i/4;g+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="#e2e8f0"/><text x="${L-5}" y="${y+4}" text-anchor="end" font-size="10" fill="#64748b">${fmtT(mx*i/4)}</text>`}
+ const n=labels.length,gw=pw/n,bw=Math.min(34,gw*.75/series.length);
+ labels.forEach((lb,i)=>{
+  const x0=L+gw*i+gw/2-bw*series.length/2;
+  series.forEach((s,j)=>{const v=s.vals[i]||0,h=ph*v/mx;
+   g+=`<rect x="${x0+bw*j}" y="${T+ph-h}" width="${bw-2}" height="${h}" rx="3" fill="${s.color}"><title>${esc(s.name)}: ${nf(v)}</title></rect>`;
+   if(v)g+=`<text x="${x0+bw*j+(bw-2)/2}" y="${T+ph-h-3}" text-anchor="middle" font-size="9" fill="#334155">${fmtT(v)}</text>`});
+  g+=`<text x="${L+gw*i+gw/2}" y="${H-B+15}" text-anchor="middle" font-size="10.5" fill="#334155">${esc(lb)}</text>`;
+ });
+ return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${g}</svg>${legend(series)}`;
+}
+function svgLine(labels,series,o={}){
+ const all=series.flatMap(s=>s.vals).filter(v=>v!=null);
+ if(!all.length)return '<p class="mut">ยังไม่มีข้อมูล</p>';
+ const W=560,H=220,L=48,R=16,T=14,B=34,pw=W-L-R,ph=H-T-B;
+ let lo=o.min!=null?o.min:Math.min(...all),hi=o.max!=null?o.max:Math.max(...all);
+ if(hi===lo){hi+=1;lo-=1}
+ if(o.min==null)lo-=(hi-lo)*.15;if(o.max==null)hi+=(hi-lo)*.15;
+ const X=i=>L+(labels.length>1?pw*i/(labels.length-1):pw/2),Y=v=>T+ph-ph*(v-lo)/(hi-lo);
+ let g='';
+ for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4,y=Y(v);g+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="#e2e8f0"/><text x="${L-5}" y="${y+4}" text-anchor="end" font-size="10" fill="#64748b">${+v.toFixed(1)}</text>`}
+ labels.forEach((lb,i)=>g+=`<text x="${X(i)}" y="${H-12}" text-anchor="middle" font-size="10.5" fill="#334155">${esc(lb)}</text>`);
+ series.forEach(s=>{
+  let d='',pen=false;
+  s.vals.forEach((v,i)=>{if(v==null){pen=false;return}d+=(pen?'L':'M')+X(i)+' '+Y(v);pen=true});
+  g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`;
+  s.vals.forEach((v,i)=>{if(v!=null)g+=`<circle cx="${X(i)}" cy="${Y(v)}" r="4" fill="${s.color}"><title>${esc(s.name)} ${esc(labels[i])}: ${v}</title></circle><text x="${X(i)}" y="${Y(v)-8}" text-anchor="middle" font-size="9.5" fill="#334155">${v}</text>`});
+ });
+ return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${g}</svg>${legend(series)}`;
+}
+function svgDonut(d){
+ const tot=d.reduce((s,x)=>s+x[1],0),r=52,C=2*Math.PI*r;let acc=0;
+ const arcs=tot?d.filter(x=>x[1]>0).map(([l,v,c])=>{const len=v/tot*C;const el=`<circle r="${r}" cx="70" cy="70" fill="none" stroke="${c}" stroke-width="22" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-acc}" transform="rotate(-90 70 70)"><title>${l}: ${v}</title></circle>`;acc+=len;return el}).join(''):`<circle r="${r}" cx="70" cy="70" fill="none" stroke="#e2e8f0" stroke-width="22"/>`;
+ return `<div class="donut"><svg viewBox="0 0 140 140" width="150" height="150">${arcs}<text x="70" y="68" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">${tot}</text><text x="70" y="86" text-anchor="middle" font-size="10" fill="#64748b">คน</text></svg><div>${d.map(([l,v,c])=>`<div class="lg"><i style="background:${c}"></i>${l}: <b>${v}</b></div>`).join('')}</div></div>`;
+}
+const chartCard=(t,h)=>`<div class="card"><h3>${t}</h3>${h}</div>`;
+
+/* =================== แสดงผล =================== */
+function tabs(){
+ if(SESS.must)return[['acc','ตั้ง PIN ใหม่']];
+ const t=[['dash','ภาพรวม/กราฟ'],['reg','ลงทะเบียน/คัดกรอง'],['rx','ใบสั่งสุขภาพ'],['log','บันทึกการออกกำลังกาย'],['out','ติดตามผล'],['net','ภาคีเครือข่าย']];
+ if(isAdmin())t.push(['bud','งบประมาณ'],['adm','ผู้ดูแลระบบ']);
+ t.push(['acc','บัญชีของฉัน']);return t;
+}
+function render(){
+ if(!SESS)return;
+ buildIdx();
+ if(!tabs().some(t=>t[0]===tab))tab=tabs()[0][0];
+ $('#nav').innerHTML=tabs().map(([k,l])=>`<button class="${k===tab?'on':''}" onclick="go('${k}')">${l}</button>`).join('');
+ $('#main').innerHTML=({dash:vDash,reg:vReg,rx:vRx,log:vLog,out:vOut,net:vNet,bud:vBud,adm:vAdm,acc:vAcc})[tab]();
+}
+function go(t){tab=t;render();window.scrollTo(0,0)}
+function filt(){
+ if(!isAdmin())return `<div class="note">หน่วยบริการ: <b>${esc(fname(SESS.code))}</b> (รหัส ${SESS.code}) อ.${esc(sd(FACM[SESS.code].dist))} | แสดงเฉพาะข้อมูลของหน่วยบริการนี้</div>`;
+ const fl=FAC.filter(f=>!fD||f.dist===fD);
+ return `<div class="card fb"><div><label>อำเภอ</label><select onchange="fD=this.value;fF='';render()"><option value="">ทุกอำเภอ</option>${DISTRICTS.map(d=>`<option ${d===fD?'selected':''}>${d}</option>`).join('')}</select></div>
+ <div><label>รพ.สต. / หน่วยบริการ</label><select onchange="fF=this.value;render()"><option value="">ทั้งหมด</option>${fl.map(f=>`<option value="${f.code}" ${f.code===fF?'selected':''}>${f.code} ${esc(f.name)}</option>`).join('')}</select></div></div>`;
+}
+
+/* ---------- ภาพรวม + กราฟ ---------- */
+function vDash(){
+ const P=PP(),n=P.length;
+ const ad=n?Math.round(P.reduce((s,p)=>s+adh(p.id),0)/n):0;
+ const done=P.filter(p=>adh(p.id)>=80).length;
+ const oc=P.map(p=>{const o=outc(p);return o?{dw:o.l.weight-o.b.weight,pw:(o.l.weight-o.b.weight)/o.b.weight*100,dg:o.l.glucose-o.b.glucose,dwk:o.b.walk&&o.l.walk?o.l.walk-o.b.walk:null}:null}).filter(Boolean);
+ const avg=k=>{const v=oc.filter(x=>x[k]!=null);return v.length?(v.reduce((s,x)=>s+x[k],0)/v.length).toFixed(1):'-'};
+ const cnt=l=>P.filter(p=>p.level===l).length;
+ const showTarget=isAdmin()&&!fD&&!fF;
+ const spent=Object.values(db.spent).reduce((a,b)=>a+(+b||0),0);
+ const wk=[...Array(12)].map((_,i)=>{const w=i+1,A=P.filter(p=>addDays(p.start,7*(w-1))<=today());return A.length?Math.round(A.reduce((s,p)=>s+Math.min(5,weekDays(p,w))/5*100,0)/A.length):null});
+ const bins=[0,0,0,0,0];P.forEach(p=>{const a=adh(p.id);bins[Math.min(4,Math.floor(a/20))]++});
+ const phAvg=k=>[0,6,12].map(ph=>{const v=P.map(p=>(IDX.as[p.id]||{})[ph]).filter(a=>a&&a[k]!=null).map(a=>a[k]);return v.length?+(v.reduce((s,x)=>s+x,0)/v.length).toFixed(1):null});
+ const PHL=['สัปดาห์ 0','สัปดาห์ 6','สัปดาห์ 12'];
+ let distChart='',top='';
+ if(isAdmin()){
+  const dc=DISTRICTS.map(d=>{const A=P.filter(p=>p.district===d);return[sd(d),A.length,A.filter(p=>adh(p.id)>=80).length]});
+  distChart=chartCard('ผู้เข้าร่วมรายอำเภอ',svgBars(dc.map(x=>x[0]),[{name:'ผู้เข้าร่วม',color:'#0f766e',vals:dc.map(x=>x[1])},{name:'ปฏิบัติตามใบสั่ง ≥ 80%',color:'#f59e0b',vals:dc.map(x=>x[2])}]));
+  const fc=FAC.map(f=>[f.name,P.filter(p=>p.fac===f.code).length]).filter(x=>x[1]).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  top=chartCard('10 อันดับ รพ.สต. ที่มีผู้เข้าร่วมมากที่สุด',fc.length?bars(fc.map(x=>[x[0],x[1]]),fc[0][1]):'<p class="mut">ยังไม่มีข้อมูล</p>');
+ }
+ return `${filt()}
+ <div class="kpis">
+  <div class="kpi"><b>${showTarget?n+'/'+CONFIG.TARGET:n}</b><span>ผู้เข้าร่วม${showTarget?' / เป้าหมาย':''}</span></div>
+  <div class="kpi"><b>${ad}%</b><span>ความสม่ำเสมอเฉลี่ย</span></div>
+  <div class="kpi"><b>${done}</b><span>ปฏิบัติตามใบสั่ง ≥ 80%${n?' ('+Math.round(done/n*100)+'%)':''}</span></div>
+  <div class="kpi"><b>${avg('pw')}%</b><span>น้ำหนักเปลี่ยนเฉลี่ย (เป้า ≤ -3%)</span></div>
+  <div class="kpi"><b>${avg('dg')}</b><span>น้ำตาลเปลี่ยนเฉลี่ย (mg/dL)</span></div>
+  <div class="kpi"><b>${avg('dwk')}</b><span>เดิน 6 นาที เพิ่มเฉลี่ย (ม.)</span></div>
+  ${isAdmin()?`<div class="kpi"><b>${(spent/6000).toFixed(1)}%</b><span>เบิกจ่ายแล้ว ${nf(spent)} บาท</span></div>`:''}
+ </div>
+ <div class="grid g3">
+  ${chartCard('ระดับความเสี่ยง',svgDonut([['เสี่ยงต่ำ',cnt('low'),LVC.low],['เสี่ยงปานกลาง',cnt('mid'),LVC.mid],['เสี่ยงสูง',cnt('high'),LVC.high],['ส่งต่อแพทย์',cnt('refer'),LVC.refer]]))}
+  ${chartCard('ความสม่ำเสมอรายสัปดาห์ (% ของเป้า 5 วัน/สัปดาห์)',svgLine(wk.map((_,i)=>'ส.'+(i+1)),[{name:'ความสม่ำเสมอ',color:'#0f766e',vals:wk}],{min:0,max:100}))}
+  ${chartCard('การกระจายร้อยละการปฏิบัติตามใบสั่ง',svgBars(['0-19','20-39','40-59','60-79','80-100'],[{name:'จำนวนคน',color:'#0369a1',vals:bins}]))}
+  ${chartCard('น้ำหนักเฉลี่ย (กก.) ก่อน-หลัง',svgLine(PHL,[{name:'น้ำหนัก',color:'#dc2626',vals:phAvg('weight')}]))}
+  ${chartCard('น้ำตาลในเลือดเฉลี่ย (mg/dL)',svgLine(PHL,[{name:'น้ำตาล',color:'#f59e0b',vals:phAvg('glucose')}]))}
+  ${chartCard('ทดสอบเดิน 6 นาทีเฉลี่ย (เมตร)',svgLine(PHL,[{name:'ระยะเดิน',color:'#16a34a',vals:phAvg('walk')}]))}
+ </div>
+ ${distChart}${top}
+ <div class="card"><h3>เครื่องมือข้อมูล</h3><div class="actions">
+  <button class="btn" onclick="exportCSV()">ส่งออก CSV</button>
+  <button class="btn sec" onclick="backup()">สำรองข้อมูล (JSON)</button>
+  <button class="btn sec" onclick="$('#imp').click()">กู้คืนข้อมูล</button>
+  <input type="file" id="imp" accept=".json" style="display:none" onchange="restore(event)">
+  <button class="btn sec" onclick="demo()">โหลดข้อมูลตัวอย่าง</button>
+  <button class="btn sec" onclick="clearDemo()">ลบข้อมูลตัวอย่าง</button>
+ </div></div>`;
+}
+
+/* ---------- ลงทะเบียน ---------- */
+function vReg(){
+ const q=qReg.trim().toLowerCase();
+ let L=PP();if(q)L=L.filter(p=>(p.name+p.id).toLowerCase().includes(q));
+ const rows=L.slice(0,300).map(p=>`<tr><td>${p.id}</td><td>${esc(p.name)}</td><td>${esc(sd(p.district))}</td><td>${esc(p.rpst)}</td><td class="r">${p.bmi}</td><td class="r">${p.glucose}</td><td>${p.covid?'เคย':'ไม่เคย'}</td><td>${badge(p.level)}</td>
+ <td><button class="btn sm sec" onclick="selRx='${p.id}';go('rx')">ใบสั่ง</button> <button class="btn sm red" onclick="delP('${p.id}')">ลบ</button></td></tr>`).join('');
+ const facSel=isAdmin()?`<div><label>รพ.สต. ที่รับผิดชอบ *</label><select name="fac" required><option value="">-- เลือก --</option>${DISTRICTS.map(d=>`<optgroup label="อ.${d}">${FAC.filter(f=>f.dist===d).map(f=>`<option value="${f.code}">${f.code} ${esc(f.name)}</option>`).join('')}</optgroup>`).join('')}</select></div>`:`<div><label>หน่วยบริการ</label><input value="${esc(SESS.code+' '+fname(SESS.code))}" readonly></div>`;
+ return `${filt()}<div class="card"><h2>ลงทะเบียนและคัดกรองกลุ่มเสี่ยง</h2>
+ <form onsubmit="return submitReg(event)"><div class="grid g2">
+  <div><label>ชื่อ-นามสกุล *</label><input name="name" required></div>
+  <div><label>อายุ (ปี) *</label><input name="age" type="number" min="15" max="100" required></div>
+  <div><label>เพศ</label><select name="sex"><option>หญิง</option><option>ชาย</option><option>อื่น ๆ</option></select></div>
+  ${facSel}
+  <div><label>น้ำหนัก (กก.) *</label><input name="weight" type="number" step="0.1" min="30" max="250" required></div>
+  <div><label>ส่วนสูง (ซม.) *</label><input name="height" type="number" step="0.1" min="120" max="220" required></div>
+  <div><label>น้ำตาลปลายนิ้วขณะอดอาหาร (mg/dL) *</label><input name="glucose" type="number" min="40" max="600" required></div>
+  <div><label>ประวัติติดเชื้อโควิด-19</label><select name="covid"><option value="0">ไม่เคย</option><option value="1">เคย</option></select></div>
+  <div><label>อสม./แกนนำสุขภาพ คู่หู</label><input name="asm"></div>
+ </div>
+ <p><label style="display:flex;gap:8px;align-items:center;color:var(--tx)"><input type="checkbox" required style="width:auto"> ผู้เข้าร่วมให้ความยินยอมในการเก็บและใช้ข้อมูลสุขภาพ (PDPA)</label></p>
+ <button class="btn">บันทึกและประเมินความเสี่ยง</button></form>
+ <p class="mut">เกณฑ์: BMI ≥ 23 น้ำหนักเกิน / ≥ 25 อ้วน (เอเชีย), น้ำตาล 100-125 = เสี่ยงเบาหวาน, ≥ 126 = ส่งต่อแพทย์ก่อนเริ่มออกกำลังกาย | รหัสผู้เข้าร่วมขึ้นต้นด้วยเลขสถานพยาบาล 5 หลัก</p></div>
+ <div class="card"><h3>รายชื่อผู้เข้าร่วม (${L.length} คน)</h3>
+ <div style="max-width:320px;margin-bottom:10px"><input placeholder="ค้นหาชื่อหรือรหัส แล้วกด Enter" value="${esc(qReg)}" onchange="qReg=this.value;render()"></div>
+ <div class="scroll"><table><tr><th>รหัส</th><th>ชื่อ</th><th>อำเภอ</th><th>รพ.สต.</th><th class="r">BMI</th><th class="r">น้ำตาล</th><th>โควิด</th><th>ความเสี่ยง</th><th></th></tr>
+ ${rows||'<tr><td colspan="9" style="text-align:center;color:var(--mut)">ยังไม่มีข้อมูล</td></tr>'}</table></div>${L.length>300?'<p class="mut">แสดง 300 รายการแรก ใช้ช่องค้นหาเพื่อกรอง</p>':''}</div>`;
+}
+function submitReg(e){
+ e.preventDefault();const f=Object.fromEntries(new FormData(e.target));
+ const fac=isAdmin()?f.fac:SESS.code,F=FACM[fac];if(!F){alert('กรุณาเลือก รพ.สต.');return false}
+ const p=addP({fac,name:f.name.trim(),age:+f.age,sex:f.sex,district:F.dist,rpst:F.name,weight:+f.weight,height:+f.height,glucose:+f.glucose,covid:f.covid==='1',asm:f.asm.trim()});
+ putAssess(p,0,{date:p.start,weight:p.weight,glucose:p.glucose,walk:null});
+ save();selRx=p.id;alert(`บันทึกแล้ว: ${p.name}\nรหัส ${p.id}\nBMI ${p.bmi} | ระดับ: ${LV[p.level][0]}`);render();return false;
+}
+function delP(id){
+ if(!confirm('ลบผู้เข้าร่วมและข้อมูลที่เกี่ยวข้อง?'))return;
+ const t=Date.now();
+ db.participants.forEach(p=>{if(p.id===id){p.del=1;p.upd=t}});
+ db.logs.forEach(l=>{if(l.pid===id){l.del=1;l.upd=t}});
+ db.assess.forEach(a=>{if(a.pid===id){a.del=1;a.upd=t}});
+ save();render();
+}
+
+/* ---------- ใบสั่งสุขภาพ ---------- */
+function vRx(){
+ const p=PP().find(x=>x.id===selRx);let body='<div class="card">เลือกผู้เข้าร่วมเพื่อดูใบสั่งสุขภาพ</div>';
+ if(p){
+  if(p.level==='refer'){
+   body=`<div class="card warn"><h3>ยังไม่ออกใบสั่งออกกำลังกาย</h3><p><b>${esc(p.name)}</b> มีระดับน้ำตาล <b>${p.glucose} mg/dL</b> (≥ 126) ต้องส่งต่อแพทย์เพื่อประเมินและยืนยันการวินิจฉัยก่อน เมื่อแพทย์อนุญาตจึงเริ่มโปรแกรมออกกำลังกาย</p></div>`;
+  }else{
+   const gentle=p.bmi>=30||p.age>=60,end=addDays(p.start,84);
+   body=`<div id="rxcard" class="rx"><div class="top">${logoImg(70)}</div>
+   <h2>ใบสั่งสุขภาพ (Health Prescription)</h2>
+   <div class="sub">ออกกำลังกายเป็นยา | โครงการรวมพลังภาคีเครือข่ายสร้างเสริมสุขภาพจังหวัดประจวบคีรีขันธ์<br>องค์การบริหารส่วนจังหวัดประจวบคีรีขันธ์ ร่วมกับ ${esc(p.rpst)} (รหัสสถานพยาบาล ${p.fac})</div>
+   <dl>
+    <dt>รหัส / ชื่อ-สกุล</dt><dd>${p.id} | ${esc(p.name)} อายุ ${p.age} ปี</dd>
+    <dt>อำเภอ / หน่วยบริการ</dt><dd>${esc(p.district)} / ${esc(p.rpst)}</dd>
+    <dt>ผลคัดกรอง</dt><dd>BMI ${p.bmi} | น้ำตาล ${p.glucose} mg/dL | โควิด: ${p.covid?'เคยติดเชื้อ':'ไม่เคย'} | ${LV[p.level][0]}</dd>
+    <dt>ชนิดการออกกำลังกาย</dt><dd>เดินเร็ว / ปั่นจักรยาน / แอโรบิก / รำไม้พลอง (เลือกได้)</dd>
+    <dt>ความหนัก</dt><dd>${gentle?'เบา-ปานกลาง: เริ่ม 15-20 นาที แล้วค่อยเพิ่มให้ถึง 30 นาที ภายใน 2 สัปดาห์':'ปานกลาง: หายใจเร็วขึ้น พูดคุยได้แต่ร้องเพลงไม่ได้'}</dd>
+    <dt>ขนาดยา (ปริมาณ)</dt><dd>30 นาที/วัน × 5 วัน/สัปดาห์</dd>
+    <dt>ระยะเวลา</dt><dd>12 สัปดาห์ (${thDate(p.start)} - ${thDate(end)})</dd>
+    <dt>หลักปฏิบัติ</dt><dd>3อ (อาหาร ออกกำลังกาย อารมณ์) 2ส (สูบบุหรี่ สุรา) 1น (นอน)</dd>
+    <dt>คู่หูสุขภาพ</dt><dd>${esc(p.asm||'-')}</dd>
+    <dt>นัดติดตามผล</dt><dd>สัปดาห์ที่ 6 (${thDate(addDays(p.start,42))}) และ 12 (${thDate(end)})</dd>
+   </dl>
+   <p style="font-size:.85rem;color:#b91c1c">หยุดออกกำลังกายและแจ้งแกนนำสุขภาพ/รพ.สต. ทันทีหากเจ็บแน่นหน้าอก เวียนศีรษะรุนแรง หน้ามืด หรือใจสั่นผิดปกติ</p>
+   <div class="sign"><div>เจ้าหน้าที่ผู้ออกใบสั่ง</div><div>ผู้รับบริการ</div></div></div>
+   <div class="actions"><button class="btn" onclick="window.print()">พิมพ์ใบสั่งสุขภาพ</button></div>`;
+  }
+ }
+ return `${filt()}<div class="card"><h2>ใบสั่งสุขภาพ</h2><label>ผู้เข้าร่วม</label><select onchange="selRx=this.value;render()">${opts(selRx)}</select></div>${body}`;
+}
+
+/* ---------- บันทึกออกกำลังกาย ---------- */
+function vLog(){
+ const p=PP().find(x=>x.id===selLog);let info='',list='';
+ if(p){
+  const s=sessions(p.id),a=adh(p.id);
+  info=`<div class="card"><h3>${esc(p.name)} (${p.id})</h3><p>สัปดาห์ที่ <b>${Math.min(weekNo(p),12)}</b> / 12 | ออกกำลังกายครบเกณฑ์ (≥ 30 นาที) <b>${s}</b> / 60 วัน</p>
+  <div class="prog"><i style="width:${a}%"></i></div><p><b>${a}%</b> ของเป้าหมาย ${a>=80?'(ผ่านเกณฑ์ ≥ 80%)':''}</p></div>`;
+  const L=db.logs.filter(l=>!l.del&&l.pid===p.id).sort((x,y)=>y.date.localeCompare(x.date)).slice(0,15);
+  list=`<div class="card"><h3>บันทึกล่าสุด</h3><table><tr><th>วันที่</th><th>กิจกรรม</th><th class="r">นาที</th><th>หมายเหตุ</th><th></th></tr>
+  ${L.map(l=>`<tr><td>${thDate(l.date)}</td><td>${esc(l.type)}</td><td class="r">${l.min}</td><td>${esc(l.note||'')}</td><td><button class="btn sm red" onclick="delLog('${l.id}')">ลบ</button></td></tr>`).join('')||'<tr><td colspan="5">ยังไม่มีบันทึก</td></tr>'}</table></div>`;
+ }
+ return `${filt()}<div class="card"><h2>บันทึกการออกกำลังกาย (ผู้เข้าร่วม หรือ แกนนำ/อสม. คู่หู)</h2>
+ <label>ผู้เข้าร่วม</label><select onchange="selLog=this.value;render()">${opts(selLog)}</select>
+ ${p?`<form onsubmit="return submitLog(event)" style="margin-top:12px"><div class="grid g2">
+  <div><label>วันที่</label><input type="date" name="date" value="${today()}" max="${today()}" required></div>
+  <div><label>กิจกรรม</label><select name="type"><option>เดินเร็ว</option><option>ปั่นจักรยาน</option><option>แอโรบิก/เต้นออกกำลังกาย</option><option>รำไม้พลอง/ไทเก็ก</option><option>วิ่งเหยาะ</option><option>อื่น ๆ</option></select></div>
+  <div><label>ระยะเวลา (นาที)</label><input type="number" name="min" min="1" max="300" value="30" required></div>
+  <div><label>หมายเหตุ</label><input name="note"></div></div><p><button class="btn">บันทึก</button></p></form>`:''}</div>${info}${list}`;
+}
+function submitLog(e){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));const p=db.participants.find(x=>x.id===selLog);addLog(p,{date:f.date,type:f.type,min:+f.min,note:f.note});save();render();return false}
+function delLog(id){db.logs.forEach(l=>{if(l.id===id){l.del=1;l.upd=Date.now()}});save();render()}
+
+/* ---------- ติดตามผล ---------- */
+function vOut(){
+ const p=PP().find(x=>x.id===selOut);
+ const f=(v,d=1)=>v==null?'-':(v>0?'+':'')+v.toFixed(d);
+ const rows=PP().slice(0,300).map(p=>{const o=outc(p),l=o&&o.l,b=o?o.b:{weight:p.weight,glucose:p.glucose,walk:(IDX.as[p.id]||{})[0]?.walk};
+  return `<tr><td>${p.id}</td><td>${esc(p.name)}</td><td class="r">${b.weight}</td><td class="r">${l?l.weight:'-'}</td><td class="r">${l?f(l.weight-b.weight):'-'}</td>
+  <td class="r">${b.glucose}</td><td class="r">${l?l.glucose:'-'}</td><td class="r">${l?f(l.glucose-b.glucose,0):'-'}</td>
+  <td class="r">${b.walk??'-'}</td><td class="r">${l&&l.walk?l.walk:'-'}</td><td class="r">${l&&l.walk&&b.walk?f(l.walk-b.walk,0):'-'}</td></tr>`}).join('');
+ return `${filt()}<div class="card"><h2>บันทึกผลติดตาม (สัปดาห์ 0 / 6 / 12)</h2>
+ <label>ผู้เข้าร่วม</label><select onchange="selOut=this.value;render()">${opts(selOut)}</select>
+ ${p?`<form onsubmit="return submitOut(event)" style="margin-top:12px"><div class="grid g2">
+  <div><label>ช่วงประเมิน</label><select name="phase"><option value="0">สัปดาห์ที่ 0 (ก่อนเริ่ม: เพิ่มผลเดิน 6 นาที)</option><option value="6">สัปดาห์ที่ 6</option><option value="12">สัปดาห์ที่ 12</option></select></div>
+  <div><label>วันที่ประเมิน</label><input type="date" name="date" value="${today()}" required></div>
+  <div><label>น้ำหนัก (กก.)</label><input type="number" step="0.1" name="weight" value="${p.weight}" required></div>
+  <div><label>น้ำตาลในเลือด (mg/dL)</label><input type="number" name="glucose" value="${p.glucose}" required></div>
+  <div><label>ทดสอบเดิน 6 นาที (เมตร)</label><input type="number" name="walk" min="0" max="1000"></div></div>
+  <p><button class="btn">บันทึกผล</button></p></form>`:''}</div>
+ <div class="card"><h3>ตารางเปรียบเทียบก่อน-หลัง</h3><div class="scroll"><table>
+ <tr><th>รหัส</th><th>ชื่อ</th><th class="r">นน. ก่อน</th><th class="r">ล่าสุด</th><th class="r">Δ</th><th class="r">น้ำตาล ก่อน</th><th class="r">ล่าสุด</th><th class="r">Δ</th><th class="r">เดิน ก่อน</th><th class="r">ล่าสุด</th><th class="r">Δ</th></tr>
+ ${rows||'<tr><td colspan="11">ยังไม่มีข้อมูล</td></tr>'}</table></div></div>`;
+}
+function submitOut(e){
+ e.preventDefault();const f=Object.fromEntries(new FormData(e.target));const p=db.participants.find(x=>x.id===selOut);
+ putAssess(p,+f.phase,{date:f.date,weight:+f.weight,glucose:+f.glucose,walk:f.walk?+f.walk:null});
+ save();toast('บันทึกผลเรียบร้อย');render();return false;
+}
+
+/* ---------- ภาคีเครือข่าย ---------- */
+function vNet(){
+ const ad=isAdmin();
+ return `<div class="card"><h2>ทะเบียนภาคีเครือข่าย</h2><div class="note">กลไก 4 ระดับ: จังหวัด (มาตรฐาน/ข้อมูล) → อำเภอ (โค้ช) → ตำบล/รพ.สต. (ปฏิบัติการ) → อสม./แกนนำสุขภาพ (ติดตามผล)</div>
+ <div class="scroll"><table><tr><th>ภาคี</th><th>ประเภท</th><th>บทบาทในโครงการ</th><th>ผู้ติดต่อ</th>${ad?'<th></th>':''}</tr>
+ ${db.partners.map((x,i)=>`<tr><td>${esc(x.name)}</td><td>${esc(x.type)}</td><td>${esc(x.role)}</td><td>${esc(x.contact)}</td>${ad?`<td><button class="btn sm red" onclick="delPartner(${i})">ลบ</button></td>`:''}</tr>`).join('')}</table></div></div>
+ ${ad?`<div class="card"><h3>เพิ่มภาคีเครือข่าย</h3><form onsubmit="return addPartner(event)"><div class="grid g2">
+  <div><label>ชื่อหน่วยงาน/องค์กร *</label><input name="name" required></div>
+  <div><label>ประเภท</label><select name="type"><option>อปท.</option><option>หน่วยงานสาธารณสุข</option><option>โรงพยาบาล</option><option>หน่วยบริการปฐมภูมิ</option><option>อาสาสมัคร</option><option>สถานศึกษา</option><option>ภาคเอกชน</option><option>ภาคประชาสังคม</option></select></div>
+  <div><label>บทบาท *</label><input name="role" required></div><div><label>ผู้ติดต่อ/โทร</label><input name="contact"></div></div><p><button class="btn">เพิ่ม</button></p></form></div>`:''}`;
+}
+function addPartner(e){e.preventDefault();db.partners.push(Object.fromEntries(new FormData(e.target)));db.metaUpd=Date.now();save();render();return false}
+function delPartner(i){db.partners.splice(i,1);db.metaUpd=Date.now();save();render()}
+
+/* ---------- งบประมาณ (ผู้ดูแล) ---------- */
+function vBud(){
+ const tot={1:0,2:0},sp={1:0,2:0};let html='';
+ [1,2].forEach(a=>{
+  const items=BUDGET.filter(b=>b.act===a);items.forEach(b=>{tot[a]+=b.amt;sp[a]+=+db.spent[b.id]||0});
+  html+=`<div class="card"><h3>${ACT_NAME[a]}</h3><div class="scroll"><table><tr><th>รายการ</th><th class="r">งบที่ตั้ง</th><th class="r">เบิกจ่ายจริง</th><th class="r">คงเหลือ</th></tr>
+  ${items.map(b=>{const s=+db.spent[b.id]||0;return `<tr><td>${esc(b.name)}</td><td class="r">${nf(b.amt)}</td><td class="r"><input type="number" min="0" style="width:120px;text-align:right" value="${s||''}" onchange="setSpent('${b.id}',this.value)"></td><td class="r" style="color:${b.amt-s<0?'#dc2626':'inherit'}">${nf(b.amt-s)}</td></tr>`}).join('')}
+  <tr><th>รวม</th><th class="r">${nf(tot[a])}</th><th class="r">${nf(sp[a])}</th><th class="r">${nf(tot[a]-sp[a])}</th></tr></table></div></div>`;
+ });
+ const T=tot[1]+tot[2],S=sp[1]+sp[2];
+ return `<div class="kpis"><div class="kpi"><b>${nf(T)}</b><span>งบรวมโครงการ (บาท)</span></div><div class="kpi"><b>${nf(S)}</b><span>เบิกจ่ายแล้ว</span></div><div class="kpi"><b>${nf(T-S)}</b><span>คงเหลือ</span></div><div class="kpi"><b>${(S/T*100).toFixed(1)}%</b><span>ร้อยละการเบิกจ่าย</span></div></div>
+ ${chartCard('งบที่ตั้ง เทียบ เบิกจ่ายจริง (บาท)',svgBars(['กิจกรรมที่ 1','กิจกรรมที่ 2'],[{name:'งบที่ตั้ง',color:'#0f766e',vals:[tot[1],tot[2]]},{name:'เบิกจ่ายจริง',color:'#f59e0b',vals:[sp[1],sp[2]]}]))}${html}`;
+}
+function setSpent(id,v){db.spent[id]=+v||0;db.metaUpd=Date.now();save();render()}
+
+/* ---------- ผู้ดูแลระบบ ---------- */
+function vAdm(){
+ const rows=FAC.map(f=>{const P=db.participants.filter(p=>!p.del&&p.fac===f.code);const a=P.length?Math.round(P.reduce((s,p)=>s+adh(p.id),0)/P.length):0;
+  return `<tr><td><b>${f.code}</b></td><td>${esc(f.name)}</td><td>${esc(sd(f.dist))}</td><td class="r">${P.length}</td><td class="r">${P.length?a+'%':'-'}</td><td><button class="btn sm sec" onclick="resetPin('${f.code}')">รีเซ็ต PIN</button></td></tr>`}).join('');
+ return `<div class="card"><h2>ตั้งค่าระบบ</h2>
+ <div class="grid g2"><div><label>URL Google Apps Script (Web App)</label><input id="cu" value="${esc(url())}" placeholder="https://script.google.com/macros/s/.../exec"></div>
+ <div><label>ซิงค์อัตโนมัติ (หลังบันทึก 5 วินาที)</label><select id="ca"><option value="1" ${cfg.auto!==false?'selected':''}>เปิด</option><option value="0" ${cfg.auto===false?'selected':''}>ปิด</option></select></div></div>
+ <div class="actions"><button class="btn" onclick="saveSet()">บันทึกการตั้งค่า</button><button class="btn sec" onclick="testConn()">ทดสอบการเชื่อมต่อ</button></div>
+ <p class="mut">การตั้งค่านี้เก็บเฉพาะเครื่องนี้ หากต้องการให้ทุกเครื่องใช้ร่วมกัน ให้ใส่ URL ในตัวแปร CONFIG.SHEETS_URL ที่ต้นสคริปต์ของไฟล์ index.html</p>
+ <hr style="border:0;border-top:1px solid var(--bd);margin:14px 0">
+ <label>โลโก้ อบจ.ประจวบคีรีขันธ์ (อัปโหลดเก็บเฉพาะเครื่องนี้ หรือวางไฟล์ ${esc(CONFIG.LOGO_URL)} ไว้ข้าง index.html)</label>
+ <div class="actions" style="align-items:center">${logoImg(56)}<button class="btn sec" onclick="$('#lg').click()">อัปโหลดโลโก้</button><button class="btn sec" onclick="resetLogo()">ใช้ค่าเริ่มต้น</button><input type="file" id="lg" accept="image/*" style="display:none" onchange="upLogo(event)"></div></div>
+ <div class="card"><h3>รหัสสถานพยาบาล 44 แห่ง (ชื่อผู้ใช้ของแกนนำ)</h3>
+ <div class="actions" style="margin:0 0 10px"><button class="btn sec" onclick="exportFac()">ดาวน์โหลดรายชื่อ CSV</button><button class="btn red" onclick="resetAll()">ล้างข้อมูลในเครื่องนี้</button></div>
+ <div class="scroll"><table><tr><th>รหัส</th><th>หน่วยบริการ</th><th>อำเภอ</th><th class="r">ผู้เข้าร่วม</th><th class="r">ปฏิบัติตามเฉลี่ย</th><th>จัดการ</th></tr>${rows}</table></div></div>`;
+}
+function saveSet(){cfg.url=$('#cu').value.trim();cfg.auto=$('#ca').value==='1';saveCfg();toast('บันทึกการตั้งค่าแล้ว')}
+async function testConn(){saveSet();if(!url()){alert('ยังไม่ได้ใส่ URL');return}
+ try{const r=await api('login');alert(r.ok?'เชื่อมต่อ Google Sheets สำเร็จ':'เชื่อมต่อได้ แต่ถูกปฏิเสธ: '+(r.err||''))}catch(e){alert('เชื่อมต่อไม่ได้: '+e.message)}}
+async function resetPin(code){
+ if(!confirm(`รีเซ็ต PIN ของ ${code} ${fname(code)} ให้กลับเป็นเลข 5 หลักเดิม?`))return;
+ if(url()){try{const r=await api('resetpin',{target:code});if(!r.ok)throw new Error(r.err)}catch(e){alert('รีเซ็ตบนเซิร์ฟเวอร์ไม่สำเร็จ: '+e.message);return}}
+ delete pins[code];savePins();toast('รีเซ็ต PIN แล้ว (ผู้ใช้ต้องตั้ง PIN ใหม่เมื่อเข้าครั้งถัดไป)');
+}
+function exportFac(){download('pk-facilities.csv','\uFEFF'+['รหัสสถานพยาบาล,ชื่อ,อำเภอ',...FAC.map(f=>`="${f.code}",${f.name.replace(/,/g,' ')},${f.dist}`)].join('\n'),'text/csv;charset=utf-8')}
+
+/* ---------- บัญชีของฉัน ---------- */
+function vAcc(){
+ return `<div class="card"><h2>${SESS.must?'กรุณาตั้ง PIN ใหม่ก่อนใช้งาน':'บัญชีของฉัน'}</h2>
+ ${SESS.must?'<div class="note warn">คุณกำลังใช้ PIN เริ่มต้น ระบบกำหนดให้เปลี่ยนก่อนเข้าใช้งานส่วนอื่น</div>':''}
+ <p><b>${esc(isAdmin()?'ผู้ดูแลระบบ อบจ.ประจวบคีรีขันธ์':fname(SESS.code))}</b> | รหัส ${SESS.code}</p>
+ <form onsubmit="return changePin(event)" style="max-width:360px">
+  <label>PIN ปัจจุบัน</label><input type="password" name="old" required autocomplete="current-password">
+  <label style="margin-top:8px">PIN ใหม่ (อย่างน้อย 6 ตัว และต้องไม่ใช่เลขสถานพยาบาล)</label><input type="password" name="n1" minlength="6" required autocomplete="new-password">
+  <label style="margin-top:8px">ยืนยัน PIN ใหม่</label><input type="password" name="n2" minlength="6" required autocomplete="new-password">
+  <p><button class="btn">เปลี่ยน PIN</button></p></form></div>`;
+}
+async function changePin(e){
+ e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),code=SESS.code;
+ if(await hashPin(code,f.old)!==SESS.hash){alert('PIN ปัจจุบันไม่ถูกต้อง');return false}
+ if(f.n1.length<6||f.n1===code||f.n1===CONFIG.ADMIN_PIN){alert('PIN ใหม่ต้องมีอย่างน้อย 6 ตัว และไม่ซ้ำกับค่าเริ่มต้น');return false}
+ if(f.n1!==f.n2){alert('PIN ยืนยันไม่ตรงกัน');return false}
+ const nh=await hashPin(code,f.n1);
+ if(url()){try{const r=await api('setpin',{newHash:nh});if(!r.ok)throw new Error(r.err)}catch(x){alert('ตั้ง PIN บนเซิร์ฟเวอร์ไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่: '+x.message);return false}}
+ pins[code]=nh;savePins();SESS.hash=nh;SESS.must=false;saveSess();
+ alert('เปลี่ยน PIN สำเร็จ');tab='dash';render();if(url())sync(false);return false;
+}
+
+/* =================== ซิงค์ Google Sheets =================== */
+function mergeIn(tbl,rows){
+ const m=new Map(db[tbl].map(r=>[r.id,r]));let ch=0;
+ rows.forEach(r=>{if(!r||!r.id)return;const o=m.get(r.id);if(!o||(r.upd||0)>(o.upd||0)){m.set(r.id,r);ch++}});
+ db[tbl]=[...m.values()];return ch;
+}
+let syncing=false;
+const setStat=t=>{const s=$('#sst');if(s)s.textContent=t};
+async function sync(manual){
+ if(!url()){if(manual)alert('ยังไม่ได้ตั้งค่า Google Sheets (ผู้ดูแลระบบตั้งได้ในแท็บ "ผู้ดูแลระบบ")');return}
+ if(syncing||!SESS||SESS.must)return;syncing=true;setStat('กำลังซิงค์...');
+ const t0=Date.now();
+ try{
+  const r=await api('pull');if(!r.ok)throw new Error(r.err||'pull failed');
+  let ch=0;
+  ['participants','logs','assess'].forEach(t=>ch+=mergeIn(t,(r.data[t]||[]).filter(inScope)));
+  if(isAdmin()&&r.meta&&(r.meta.upd||0)>(db.metaUpd||0)){db.spent=r.meta.spent||{};db.partners=r.meta.partners||db.partners;db.metaUpd=r.meta.upd;ch++}
+  saveRaw();
+  const since=db.lp[SESS.code]||0,mine=t=>db[t].filter(x=>inScope(x)&&(x.upd||0)>since);
+  const body={participants:mine('participants'),logs:mine('logs'),assess:mine('assess')};
+  if(isAdmin())body.meta={spent:db.spent,partners:db.partners,upd:db.metaUpd||Date.now()};
+  const p=await api('push',body);if(!p.ok)throw new Error(p.err||'push failed');
+  db.lp[SESS.code]=t0;saveRaw();
+  setStat('ซิงค์ล่าสุด '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
+  if(ch||manual)render();if(manual)toast('ซิงค์สำเร็จ');
+ }catch(e){setStat('ซิงค์ไม่สำเร็จ');if(manual)alert('ซิงค์ไม่สำเร็จ: '+e.message)}
+ finally{syncing=false}
+}
+window.addEventListener('online',()=>{if(SESS)schedSync()});
+
+/* =================== เครื่องมือข้อมูล =================== */
+function download(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function exportCSV(){
+ const h=['รหัสผู้เข้าร่วม','รหัสสถานพยาบาล','ชื่อ','อายุ','เพศ','อำเภอ','รพ.สต.','น้ำหนัก','ส่วนสูง','BMI','น้ำตาล','โควิด','ระดับเสี่ยง','คู่หู','วันเริ่ม','วันออกกำลังกายครบเกณฑ์','ร้อยละปฏิบัติตาม'];
+ const q=v=>`"${String(v??'').replace(/"/g,'""')}"`;
+ const rows=PP().map(p=>[p.id,`="${p.fac}"`,p.name,p.age,p.sex,p.district,p.rpst,p.weight,p.height,p.bmi,p.glucose,p.covid?'เคย':'ไม่เคย',LV[p.level][0],p.asm,p.start,sessions(p.id),adh(p.id)].map(q).join(','));
+ download(`pk-health-rx-${SESS.code}.csv`,'\uFEFF'+[h.map(q).join(','),...rows].join('\n'),'text/csv;charset=utf-8');
+}
+function backup(){
+ const o={v:2,participants:db.participants.filter(inScope),logs:db.logs.filter(inScope),assess:db.assess.filter(inScope)};
+ if(isAdmin()){o.spent=db.spent;o.partners=db.partners}
+ download(`pk-health-rx-backup-${SESS.code}-${today()}.json`,JSON.stringify(o),'application/json');
+}
+function restore(e){
+ const f=e.target.files[0];if(!f)return;const r=new FileReader();
+ r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.participants)throw 0;
+  ['participants','logs','assess'].forEach(t=>mergeIn(t,(d[t]||[]).filter(inScope)));
+  save();render();alert('กู้คืนข้อมูลสำเร็จ (รวมเฉพาะข้อมูลที่อยู่ในสิทธิ์ของคุณ)')}catch(x){alert('ไฟล์ไม่ถูกต้อง')}};
+ r.readAsText(f);
+}
+function resetAll(){if(confirm('ล้างข้อมูลทั้งหมดในเครื่องนี้? (ข้อมูลใน Google Sheets ไม่ถูกลบ) แนะนำให้สำรองก่อน')){db=fresh();saveRaw();render()}}
+function demo(){
+ if(!confirm('โหลดข้อมูลตัวอย่าง 10 คน?'))return;
+ const N=['สมชาย ใจดี','สมหญิง รักสุข','ประเสริฐ ทองดี','วิภา สายชล','มานะ ศรีสุข','อรทัย บุญมา','สุรชัย แก้วใส','นภา จันทร์เพ็ญ','ธีรพงษ์ คงมั่น','ลำดวน พรหมมา'];
+ N.forEach((n,i)=>{
+  const F=isAdmin()?FAC[(i*5)%FAC.length]:FACM[SESS.code];
+  const h=150+Math.floor(Math.random()*25),w=Math.round((24+Math.random()*10)*Math.pow(h/100,2)),g=85+Math.floor(Math.random()*35);
+  const p=addP({fac:F.code,name:'(ตัวอย่าง) '+n,age:30+Math.floor(Math.random()*35),sex:i%2?'หญิง':'ชาย',district:F.dist,rpst:F.name,weight:w,height:h,glucose:g,covid:i%3!==0,asm:'แกนนำตัวอย่าง',start:addDays(today(),-45)});
+  for(let d=44;d>=0;d--)if(Math.random()<.7)addLog(p,{date:addDays(today(),-d),min:20+Math.floor(Math.random()*30),type:'เดินเร็ว',note:''});
+  putAssess(p,0,{date:p.start,weight:p.weight,glucose:p.glucose,walk:380+Math.floor(Math.random()*80)});
+  putAssess(p,6,{date:addDays(p.start,42),weight:+(p.weight-Math.random()*3).toFixed(1),glucose:Math.max(80,p.glucose-Math.floor(Math.random()*10)),walk:430+Math.floor(Math.random()*80)});
+ });
+ save();render();
+}
+function clearDemo(){
+ if(!confirm('ลบข้อมูลตัวอย่างทั้งหมดที่ขึ้นต้นด้วย "(ตัวอย่าง)"?'))return;
+ const t=Date.now(),ids=new Set(db.participants.filter(p=>!p.del&&inScope(p)&&p.name.startsWith('(ตัวอย่าง)')).map(p=>p.id));
+ db.participants.forEach(p=>{if(ids.has(p.id)){p.del=1;p.upd=t}});
+ db.logs.forEach(l=>{if(ids.has(l.pid)){l.del=1;l.upd=t}});
+ db.assess.forEach(a=>{if(ids.has(a.pid)){a.del=1;a.upd=t}});
+ save();render();toast(`ลบข้อมูลตัวอย่าง ${ids.size} รายการ`);
+}
+
+/* =================== เริ่มทำงาน =================== */
+if(SESS&&(FACM[SESS.code]||SESS.code===CONFIG.ADMIN_CODE))start();else{SESS=null;showLogin()}
+</script>
+</body>
+</html>
